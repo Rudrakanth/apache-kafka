@@ -1,0 +1,38 @@
+START ZOOKEEPER
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+START KAFKA BROKER
+bin/kafka-server-start.sh config/server.properties
+
+CREATE TOPIC
+bin/kafka-topics.sh --bootstrap-server localhost:9092 \
+--create --replication-factor 1 --partitions 3 \
+--topic kafkatopic
+
+LIST TOPICS
+bin/kafka-topic.sh --bootstrap-server localhost:9092 \
+--list
+
+TOPIC DETIAL
+bin/kafka-topics.sh --bootstrap-server localhost:9092 \
+--describe --topic kafkatopic
+
+START CONSOLE PRODUCER
+bin/kafka-console-producer.sh --broker-list localhost:9092 \
+--topic kafkatopic
+
+START CONSOLE CONSUMER
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+--topic kafkatopic --from-beginning
+
+LIST ALL CONSUMER GROUPS
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 \
+--list
+
+CONSUMER GROUP DETIALS
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 \
+--group kafkatest --describe
+
+
+
+
